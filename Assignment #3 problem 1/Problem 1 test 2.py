@@ -27,15 +27,15 @@ def edge_irregular_labeling(n):
 n_value = 8  # Adjust n value here
 labels = edge_irregular_labeling(n_value)
 if isinstance(labels, dict):
-    print("Vertex and Edge labels for S_{},3:".format(n_value))
-    print("Vertex labels:")
+    print("Vertex labels for S_{},3:".format(n_value))
+    print("Centroid vertex labels:")
     for vertex, label in labels.items():
         if isinstance(vertex, int):
-            print("Vertex {}: Label {}".format(vertex, label))
-    print("\nEdge labels:")
+            print("Centroid {}: Label {}".format(vertex, label))
+    print("\nPendant vertex labels:")
     for edge, label in labels.items():
         if isinstance(edge, tuple):
-            print("Edge {}: Label {}".format(edge, label))
+            print("Pendant {}: Label {}".format(edge, label))
 else:
     print(labels)
 
