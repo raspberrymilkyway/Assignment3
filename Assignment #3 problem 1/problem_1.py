@@ -1,11 +1,9 @@
-import networkx as nx
-import matplotlib.pyplot as plt
 import math
 
 
 '''
     returns [a,b,c]
-    were a is connect to center
+    were a is connect to center node
     a and b are connected
     a and c are connected
 
@@ -75,7 +73,7 @@ def generate_graph(n):
 
 
 '''
-returns wts array : [[x,y,z] , [p,q,r] ...] ,
+returns wts array : [[x,y,z..] , [p,q,r..] ...] ,
 returns repeated flag : to check weather there is some repeated wts or not
 
 here, 
@@ -87,19 +85,46 @@ z - another edge wt of local center of start to pendent
 '''
 def calculate_wts(arr):
     wt = []
-    wt_set = []
-    for a, b, c in arr[1:]:
-        wt.append([a + 1, a + b, a + c])
-        wt_set.extend([a + 1, a + b, a + c])
-    return wt , len(wt_set) == len(set(wt_set))
+    for lab in arr[1:]:
+        temp = [1+lab[0]]
+        for num in lab[1:]:
+            temp.append(lab[0] + num)
+        wt.append(temp)
+    return wt 
 
 
-vertex = generate_graph(10)
-print(vertex)
-print('weights')
-wts , non_repeated = calculate_wts(vertex)
-print(wts)
-print('non repeated valuee flag :',non_repeated)
+'''
+Supporter fn for is valid to flatten the array
+'''
+def flatten(arr):
+    flattened = []
+    for item in arr:
+        if isinstance(item, list):
+            flattened.extend(flatten(item))
+        else:
+            flattened.append(item)
+    return flattened
+
+'''
+checks weather the max value in lables (graph) is less then or equal to k
+'''
+def is_valid(arr, k):
+    flattened = flatten(arr)
+    return k >= max(flattened) 
+
+
+# main
+if __name__ == "__main__":
+    n = 10
+    vertex = generate_graph(n)
+    wts = calculate_wts(vertex)
+    k = math.ceil((3*n + 1)/2)
+    print('k value',k)
+    print('lables' , vertex)
+    print('weights :', wts )
+    print('is valid lables:',is_valid(vertex,k))
+
+
 
 
 
@@ -143,5 +168,13 @@ plots not to show (not forming as expected)
 # plot_star_graph(10)
 
 # calculate k value
+  
 
-    
+# older calculate code
+# def calculate_wts(arr):
+#     wt = []
+#     wt_set = []
+#     for a, b, c in arr[1:]:
+#         wt.append([a + 1, a + b, a + c])
+#         wt_set.extend([a + 1, a + b, a + c])
+#     return wt , len(wt_set) == len(set(wt_set))
