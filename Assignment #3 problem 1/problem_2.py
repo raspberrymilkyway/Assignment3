@@ -12,23 +12,23 @@ and rest other nodes b,c... are connected to a
 
 returns list 
 '''
-def generate_graph(m,n):
+def generate_graph(n,m):
     lables = [1, [1]]
     wts = [2]
     v = m*n + 1
-    d = math.ceil(v/2) / (m - 1) # 2.272727 in our case
+    d = math.ceil(v/2) / (n - 1) # 2.272727 in our case
 
     # generate edges connected to center
-    for i in range(1,m):
+    for i in range(1,n):
         value = math.floor(d*i)
         lables.append([value])
         wts.append(value + 1)
     
     # generate pendent lables
-    for i in range(m):
+    for i in range(n):
         assumed_label = min(wts) # wts[i] # this condition looks bad so i changed it to minimum value of weight in wts array
 
-        for j in range(n-1):
+        for j in range(m-1):
             while (lables[i+1][0] + assumed_label) in wts:
                 assumed_label += 1
             wts.append(lables[i+1][0] + assumed_label)
@@ -40,10 +40,10 @@ def generate_graph(m,n):
 
 # main
 if __name__ == "__main__": 
-    m = 12
-    n = 4
+    m = 4
+    n = 12
     k = math.ceil((m*n + 1)/2)
-    labels,wts = generate_graph(m,n)
+    labels,wts = generate_graph(n,m)
     print('k value',k)
     print('labels :',labels)
     print('weights :',calculate_wts(labels))

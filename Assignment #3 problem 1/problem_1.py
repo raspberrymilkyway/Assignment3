@@ -115,7 +115,7 @@ def is_valid(arr, k):
 
 # main
 if __name__ == "__main__":
-    n = 10
+    n = 8
     vertex = generate_graph(n)
     wts = calculate_wts(vertex)
     k = math.ceil((3*n + 1)/2)
