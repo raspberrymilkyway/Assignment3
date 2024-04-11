@@ -54,6 +54,7 @@ def generate_trampoline(n,m,k): # (rename according to the algorithm name we pic
     prev = 2
     for i in range(n):
         for j in range(m-1):
+            #run through all available edges; pull the lowest out and use it on the next pendant
             low_avail = -1
             for z in range(prev,e):
                 if not used_weights[z]:
@@ -62,6 +63,8 @@ def generate_trampoline(n,m,k): # (rename according to the algorithm name we pic
                     break
             if low_avail == -1: # error; not all weights could be used
                 return labels, used_weights
+            
+            #find pendant vertex value
             calc = low_avail - labels[i+1][0]
             used_weights[low_avail] = True
             labels[i+1].append(calc)
@@ -70,6 +73,7 @@ def generate_trampoline(n,m,k): # (rename according to the algorithm name we pic
     return labels , used_weights
 
 def calculate_wts(arr):
+    #normal weights -- those found in this problem, without edges between the centroid vertices
     wt = []
     for label in arr[1:]:
         temp = [arr[0]+label[0]]
@@ -77,6 +81,10 @@ def calculate_wts(arr):
             temp.append(label[0] + num)
         wt.append(temp)
 
+    #centroid edge weights
+    # left a second method of printing in 
+    # currently is just an array of edges -- [edge,...]
+    # commented out is an array of arrays with a tuple containing the vertices used -- [[(vertex, vertex),edge],...]
     cent = []
     prev = arr[1][0]
     for label in arr[2:]:
