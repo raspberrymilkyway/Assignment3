@@ -48,7 +48,3 @@ if __name__ == "__main__":
     print('labels :',labels)
     print('weights :',calculate_wts(labels))
     print('is valid lables:',is_valid(labels,k))
-
-
-    
-

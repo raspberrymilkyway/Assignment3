@@ -1,0 +1,4 @@
+# writing psudo code for all 3 problems
+#  design stretegy -  1 - brute force , 2 - bfs,greedy , 3 - greedy
+
+# for graph development it is bfs and for traversal it is dfs
