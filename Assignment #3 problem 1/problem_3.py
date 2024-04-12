@@ -13,14 +13,12 @@ and rest other nodes b,c... are connected to a
 
 returns list 
 '''
-def generate_trampoline(n,m,k): # (rename according to the algorithm name we pick)
+def generate_trampoline(n,m,k,e): # (rename according to the algorithm name we pick)
     labels = [k]
     used_weights = []
-    v = m*n + 1
-    e = (m+1)*n
-    for _ in range(e+2):
-        used_weights.append(False)
-        #first two values won't ever be used
+
+    
+    used_weights = [False] * (e + 1)
 
     # generate labels and edges connected to center
     # first half of graph; work forwards from 0 to midpoint (inclusive)
@@ -72,6 +70,11 @@ def generate_trampoline(n,m,k): # (rename according to the algorithm name we pic
     
     return labels , used_weights
 
+'''
+returns: 
+    1. wt array -  as same as previous problems
+    2. cent - cycle wts in formate [actual_wt , (label_left , label_right)]
+'''
 def calculate_wts(arr):
     #normal weights -- those found in this problem, without edges between the centroid vertices
     wt = []
@@ -90,7 +93,7 @@ def calculate_wts(arr):
     for label in arr[2:]:
         temp = prev + label[0]
         # temp = [(prev, label[0]), prev + label[0]]
-        cent.append(temp)
+        cent.append([temp , (prev , label[0])])
         prev = label[0]
     cent.append(arr[-1][0] + arr[1][0])
     # cent.append([(arr[-1][0], arr[1][0]), arr[-1][0] + arr[1][0]])
@@ -102,7 +105,9 @@ if __name__ == "__main__":
     m = 3
     n = 8
     k = math.ceil(((m+1)*n + 1)/2)
-    labels,wts = generate_trampoline(n,m,k)
+    e = (m+1)*n + 1 # to find total no of edges including centroid
+    # v = m*n + 1 # total no of vertex in graph
+    labels,wts = generate_trampoline(n,m,k,e)
     print('k value:\t',k)
     print('labels:\t\t',labels)
     standard, centroid_cycle = calculate_wts(labels)
