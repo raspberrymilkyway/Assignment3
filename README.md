@@ -5,3 +5,6 @@ Problem 1: Homogenous amalgamated Star: S<sub>n,3</sub> # documentation provided
 Problem 2: Homogenous amalgamated Star: S<sub>n,m</sub>
 
 Problem 3: For any number n as branches with centroid vertex.
+
+Read Documentation for solutions
+problem statement 
