@@ -95,7 +95,7 @@ def calculate_wts(arr):
         # temp = [(prev, label[0]), prev + label[0]]
         cent.append([temp , (prev , label[0])])
         prev = label[0]
-    cent.append(arr[-1][0] + arr[1][0])
+    cent.append([arr[-1][0] + arr[1][0], (arr[-1][0], arr[1][0])])
     # cent.append([(arr[-1][0], arr[1][0]), arr[-1][0] + arr[1][0]])
     return wt, cent
 
