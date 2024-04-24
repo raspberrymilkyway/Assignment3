@@ -66,7 +66,7 @@ def generate_graph(n):
         print('invalid args n = ',n)
         return lables
 
-    for i in range(1,n+1):
+    for i in range(1,n+1): # O(n)
         lables.append(generate_star(i,n))
     
     return lables

@@ -24,7 +24,7 @@ def generate_trampoline(n,m,k,e): # (rename according to the algorithm name we p
     # first half of graph; work forwards from 0 to midpoint (inclusive)
     mid = math.ceil(n/2)
     prev = -1
-    for i in range(1,mid+1):
+    for i in range(1,mid+1): # ---> O(n)
         for j in range(i, k):
             if not used_weights[j + k] and (i == 1 or (i != 1 and not used_weights[prev + j])):
                 labels.append([j])
@@ -35,7 +35,7 @@ def generate_trampoline(n,m,k,e): # (rename according to the algorithm name we p
                 break
     
     # second half of graph; work backwords from n to midpoint (exclusive)
-    prev = labels[1][0]
+    prev = labels[1][0] # ----> O(n)
     for i in range(n, mid, -1):
         for j in range(k-1, i-1, -1):
             if not used_weights[j + k] and not used_weights[prev + j]:
@@ -50,7 +50,7 @@ def generate_trampoline(n,m,k,e): # (rename according to the algorithm name we p
     
     # generate pendent labels
     prev = 2
-    for i in range(n):
+    for i in range(n): # ---> O(n*(e-something))
         for j in range(m-1):
             #run through all available edges; pull the lowest out and use it on the next pendant
             low_avail = -1
